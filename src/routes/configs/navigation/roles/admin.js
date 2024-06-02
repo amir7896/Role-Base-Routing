@@ -8,8 +8,4 @@ export default [
     title: "Analytics",
     href: r.R_ANALYTICS,
   },
-  {
-    title: "Analytics",
-    href: r.R_ANALYTICS,
-  },
 ];

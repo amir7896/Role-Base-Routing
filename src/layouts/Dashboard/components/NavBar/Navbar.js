@@ -1,12 +1,4 @@
-import {
-  Typography,
-  Button,
-  Toolbar,
-  Hidden,
-  Paper,
-  Drawer,
-  Avatar,
-} from "@mui/material";
+import { Hidden, Paper, Drawer, Avatar } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 import clsx from "clsx";
@@ -22,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     overflowY: "auto",
   },
   content: {
-    padding: "10px",
+    padding: 7,
   },
   profile: {
     display: "flex",
@@ -66,16 +58,15 @@ const NavBar = (props) => {
   const navbarContent = (
     <div className={classes.content}>
       <div className={classes.profile}>
-        <Avatar
-          alt="Vendor"
-          className={classes.avatar}
-          component={RouterLink}
-          to="/profile/1/timeline"
-        >
-          {/* <img src={session.user.avatar} /> */}
+        <Avatar alt="Logo" className={classes.avatar} component={RouterLink}>
+          <img
+            style={{ objectFit: "contain" }}
+            src={
+              "https://images.unsplash.com/photo-1516876437184-593fda40c7ce?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGxvZ298ZW58MHx8MHx8fDA%3D"
+            }
+          />
         </Avatar>
       </div>
-      {/* <Divider className={classes.divider} /> */}
       <nav className={classes.navigation}>
         <Navigation
           className={classes.navbar}
@@ -88,7 +79,7 @@ const NavBar = (props) => {
 
   return (
     <Fragment>
-      <Hidden lgUp>
+      <Hidden>
         <Drawer
           anchor="left"
           onClose={onMobileClose}

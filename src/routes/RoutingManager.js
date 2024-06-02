@@ -28,15 +28,13 @@ class RoutingManager {
   }
 
   reRouteOnLogin(roles, location, navigate) {
-    // TODO: WIP
     const match = matchPath(location.pathname, r.R_LOGIN);
-
+    console.log("match ====>:", match);
     if (match) navigate(this.getInitialRouteForRole(roles[0]));
   }
 
   currentSideNavConfigs(roles = []) {
     if (isArray(roles) && !(roles[0] in this.#navigation)) return [];
-
     return this.#navigation[roles[0]];
   }
 
@@ -66,11 +64,14 @@ class RoutingManager {
   }
 
   getRoutesBasedOnRoles(roles = []) {
+    const res = this.getConfigsBasedOnRole(roles).map((ele) => ele.routes);
+    console.log("getRoutesBasedOnRoles ====>", res);
     return this.getConfigsBasedOnRole(roles).map((ele) => ele.routes);
   }
 
   getLayoutById(layoutId) {
     if (!(layoutId in this.#layouts)) return;
+    console.log("Layout by id =====>", this.#layouts[layoutId]);
 
     return this.#layouts[layoutId];
   }
@@ -85,6 +86,8 @@ class RoutingManager {
         Component: this.#views[route],
       });
     });
+
+    console.log("Mapped routes ====>", mappedRoutes);
 
     return mappedRoutes;
   }
@@ -107,6 +110,7 @@ class RoutingManager {
         });
       }
     });
+    console.log("Generated routes ====>", generatedRoutes);
 
     return generatedRoutes;
   }

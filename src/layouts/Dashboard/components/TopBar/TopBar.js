@@ -23,15 +23,15 @@ import LocalStorage from "../../../../Managers/LocalStorage";
 const TopBar = (props) => {
   const { onOpenNavBarMobile, className, ...rest } = props;
   const user = {
-    name: "amir",
-    email: "amir@gmail.com",
-    role: ["Manager"],
+    userId: "0b9bc5bf-e1f3-47fe-94a7-c55c30077f35",
+    email: "noor@gmail.com",
+    roles: ["Admin"],
+    username: "Noor",
   };
 
   const signout = () => {
     console.log("signout");
   };
-  const notificationsRef = useRef(null);
   const dropDownRef = useRef(null);
   // const { swipeeUserId } = LocalStorage.getUser();
   const classes = useStyles();
@@ -42,14 +42,6 @@ const TopBar = (props) => {
   const [notifications, setNotifications] = useState([]);
   const [showBadge, setshowBadge] = useState(false);
   const [openNotifications, setOpenNotifications] = useState(false);
-
-  const handlePricingClose = () => {
-    setPricingModalOpen(false);
-  };
-
-  const handleNotificationsClose = () => {
-    setOpenNotifications(false);
-  };
 
   return (
     <AppBar {...rest} className={clsx(classes.root, className)} color="primary">
@@ -85,8 +77,8 @@ const TopBar = (props) => {
             >
               <Avatar alt="avatar" src={user?.profilePicture} />
               <div>
-                <Typography variant="body1">{"Amir"}</Typography>
-                <Typography variant="body2">{"Admin"}</Typography>
+                <Typography variant="body1">{user?.username}</Typography>
+                <Typography variant="body2">{user?.roles[0]}</Typography>
               </div>
               <ExpandMoreOutlined variant="contained" />
             </div>

@@ -1,5 +1,4 @@
 import { isEmpty } from "lodash";
-import LocalStorage from "../Managers/LocalStorage";
 import React, { Fragment, useEffect, useState } from "react";
 import {
   Navigate,
@@ -8,37 +7,27 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
-import SignInVendor from "../views/Login";
+import SignIn from "../views/Login";
 import * as r from "./constatns";
 import RoutingManager from "./RoutingManager";
+import { useAuth } from "../hooks/useAuth";
 
 function Router(props) {
   const navigate = useNavigate();
   const location = useLocation();
-  //   const { user, isLoggedIn } = useAuth();
-  const user = {
-    name: "amir ali",
-    email: "amir@gmail.com",
-    id: 1,
-    roles: ["Manager"],
-  };
-  const isLoggedIn = () => {
-    return user !== null;
-  };
+  const { user } = useAuth();
+
   const [currentRouteIds, setCurrentRouteIds] = useState([]);
 
   useEffect(() => {
-    if (isLoggedIn()) {
+    if (user && user !== null) {
       setCurrentRouteIds(user.roles);
-      RoutingManager.reRouteOnLogin(user.roles, location, navigate);
+      RoutingManager.reRouteOnLogin(user?.roles, location, navigate);
     } else {
       setCurrentRouteIds(["AUTH"]);
-      if (LocalStorage.get("isLoggingOut")) {
-        LocalStorage.remove("isLoggingOut");
-        navigate(r.R_LOGIN);
-      }
+      navigate(r.R_LOGIN);
     }
-  }, []);
+  }, [user]);
 
   // returning nothing before routes are generated
   if (isEmpty(currentRouteIds)) return null;
@@ -47,7 +36,7 @@ function Router(props) {
     <Routes>
       <Route path="/" element={<Navigate to={r.R_LOGIN} />} />
 
-      {isLoggedIn() ? (
+      {user ? (
         <Fragment>
           <Route
             path={r.R_LOGIN}
@@ -67,7 +56,7 @@ function Router(props) {
           />
         </Fragment>
       ) : (
-        <Route path={r.R_LOGIN} element={<SignInVendor />} />
+        <Route path={r.R_LOGIN} element={<SignIn />} />
       )}
 
       {RoutingManager.generateRoutes(currentRouteIds).map(
@@ -89,11 +78,14 @@ function Router(props) {
           </Route>
         )
       )}
+
+      {/* Unatuhorized page */}
       {/* 
       {RoutingManager.getUnAuthorizedRoutes(user?.roles || []).map((path) => (
         <Route key={path} path={path} element={<Navigate to={r.R_E_401} />} />
       ))} */}
 
+      {/* Page not found */}
       <Route path="*" element={<Navigate to={r.R_E_404} />} />
     </Routes>
   );

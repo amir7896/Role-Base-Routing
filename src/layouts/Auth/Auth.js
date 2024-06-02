@@ -13,14 +13,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     overflow: "hidden",
-    backgroundColor: "red",
+    backgroundColor: "white",
   },
   content: {
     height: "100%",
-    paddingTop: 56,
-    [theme.breakpoints.up("sm")]: {
-      paddingTop: 64,
-    },
   },
 }));
 

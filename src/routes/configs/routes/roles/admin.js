@@ -10,6 +10,6 @@ export const views = {
 export const configs = {
   id: USER_ROLES.ADMIN,
   layout: "Dashboard",
-  initialPath: "/",
+  initialPath: r.R_ADMIN,
   routes: Object.keys(views),
 };

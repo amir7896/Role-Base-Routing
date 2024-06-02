@@ -1,7 +1,7 @@
 import React from "react";
 
 const Finance = () => {
-  return <div>Finance</div>;
+  return <div>Finance List</div>;
 };
 
 export default Finance;

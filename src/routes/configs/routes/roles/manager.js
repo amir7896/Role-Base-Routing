@@ -9,6 +9,6 @@ export const views = {
 export const configs = {
   id: USER_ROLES.MANAGER,
   layout: "Dashboard",
-  initialPath: "/",
+  initialPath: r.R_MANAGER,
   routes: Object.keys(views),
 };

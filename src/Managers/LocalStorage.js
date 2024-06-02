@@ -27,30 +27,6 @@ class LocalStorage {
     }
   }
 
-  remove(key) {
-    try {
-      return localStorage.removeItem(key);
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  getObject(key) {
-    try {
-      return JSON.parse(localStorage.getItem(key));
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  setObject(key, value) {
-    try {
-      return localStorage.setItem(key, JSON.stringify(value));
-    } catch (error) {
-      throw error;
-    }
-  }
-
   getUser() {
     try {
       return JSON.parse(localStorage.getItem(USER));
@@ -74,6 +50,7 @@ class LocalStorage {
       throw error;
     }
   }
+
   setToken(value) {
     try {
       return localStorage.setItem(TOKEN, JSON.stringify(value));
@@ -81,6 +58,7 @@ class LocalStorage {
       throw error;
     }
   }
+
   getToken() {
     try {
       return JSON.parse(localStorage.getItem(TOKEN));
@@ -95,31 +73,6 @@ class LocalStorage {
     } catch (error) {
       throw error;
     }
-  }
-
-  setCache(data) {
-    let cache = JSON.parse(localStorage.getItem("CACHE"));
-    cache = !cache ? {} : cache;
-    cache = { ...cache, ...data };
-    localStorage.setItem("CACHE", JSON.stringify(cache));
-  }
-
-  getCache(key) {
-    const cache = JSON.parse(localStorage.getItem("CACHE"));
-    if (!cache || !(key in cache)) return undefined;
-    return cache[key];
-  }
-
-  removeFromCache(key) {
-    let cache = JSON.parse(localStorage.getItem("CACHE"));
-    if (!cache || !(key in cache)) return undefined;
-    delete cache[key];
-    localStorage.setItem("CACHE", JSON.stringify(cache));
-    return true;
-  }
-
-  clearCache() {
-    localStorage.removeItem("CACHE");
   }
 }
 

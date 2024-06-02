@@ -1,7 +1,7 @@
 import React, { Suspense, useState } from "react";
 import PropTypes from "prop-types";
 
-import { Typography, LinearProgress } from "@mui/material";
+import { LinearProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 import { Outlet } from "react-router-dom";
